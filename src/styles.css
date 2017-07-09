@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+/*html body{
+  background-color: #286DA8;
+  color: #FFF;
+}*/
+h1{
+  font-size: 4em;
+}
+.form-text{
+  color: #CD5360 !important;
+}
+input.ng-invalid.ng-touched, input.mismatch.ng-dirty {
+  border: 2px solid #CD5360;
+}
+input.check.ng-dirty{
+  border: 2px solid green;
+}
+.thermo{
+  color: #CD5360;
+}
+/*.btn-success{
+  background-color: #B37D4E;
+}
+.btn-primary{
+  background-color: #438496;
+}*/
+.body{
+  text-align: center;
+  margin: auto !important;
+  padding-top: 30px;
+}
+.clockHolder{
+  padding: 25px;
+}
+#clock_0 h1{
+  font-size: 7em !important;
+}
+agm-map{
+  height: 300px;
+}

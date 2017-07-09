@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-xs-offset-2">
+      <h4 class="warning" *ngFor="let error of errs" >{{ errorText }}</h4>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter Email" formControlName="email" [ngClass]="{'check': !loginForm.get('email').errors}">
+          <p class="form-text text-muted" *ngIf="loginForm.get('email').errors != null && loginForm.get('email').errors['email'] && loginForm.get('email').touched">Please enter a valid Email</p>
+          <p class="form-text text-muted" *ngIf="loginForm.get('email').errors != null && loginForm.get('email').errors['noExist'] != null && loginForm.get('email').touched">Email does not exist</p>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter Password" formControlName="password" [ngClass]="{'check': !loginForm.get('password').errors}">
+          <p class="form-text text-muted" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" >Password is required</p>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" formControlName="remember">
+            Remember Me
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Log In</button>
+        <p class="form-text text-muted" *ngIf="loginForm.invalid && loginForm.touched" >Please fix form errors!</p>
+      </form>
+    </div>
+  </div>
+</div>

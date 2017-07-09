@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+        <h4>Welcome to the world clock beta!</h4>
+        <p>Please pardon our dust while we work on stylistic and functional changes to make this site great!!</p>
+        <hr>
+        <h2>Update Your Settings:</h2>
+        <div class="form-group">
+          <label for="theme">Select a theme:</label>
+          <select name="theme" id="theme" class="form-control" formControlName="theme">
+            <option value="default">Default</option>
+          </select>
+        </div>
+        <div class="form-check disabled">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" formControlName="alerts" name="alerts">
+            Alerts:
+            <small class="help-text">Feature not yet available</small>
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" formControlName="fullDay" name="fullDay">
+            24 Hour Clock
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" formControlName="metric" name="metric">
+            Metric Units
+          </label>
+        </div>
+        <hr>
+        <h2>Change Your Cities:</h2>
+        <div class="form-group">
+          <label for="search">Add a City:</label>
+          <div class="form-group row">
+            <div class="col-8">
+              <h5 *ngIf="clockInputs >=5">You have reached the maximum number of locations</h5>
+              <input type="text" #search placeholder="Search for City..." autocorret="false" autocapitalize="true" spellcheck="false" class="form-control" formControlName="citySearch" name="search" [readonly]="userClocks.length >= 5">
+            </div>
+            <div class="col-4">
+              <button class="btn btn-secondary" type="button" (click)="onAddCity()" [disabled]="userClocks.length >= 5">Add</button>
+            </div>
+          </div>
+          <div class="row" *ngIf="newCity">
+            <agm-map [latitude]="lat" [longitude]="lon" [scrollwheel]="false" [zoom]="zoom">
+              <agm-marker [latitude]="lat" [longitude]="lon"></agm-marker>
+            </agm-map>
+          </div>
+        </div>
+        <div class="row" *ngFor="let clock of userClocks; let i = index">
+          <div class="col-8" style="padding-top: 10px;">
+            <h4>{{ clock.city.name }}, {{ clock.city.country }}</h4>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-primary" type="button" (click)="onUp(i)" [disabled]="i === 0">up</button>
+            <button class="btn btn-primary" type="button" (click)="onDown(i)" [disabled]="i === userClocks.length-1">down</button>
+            <button class="btn btn-danger" type="button" (click)="onDeleteCity(i)">X</button>
+          </div>
+        </div>
+        <hr>
+        <button class="btn btn-primary" type="submit">Save</button><button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

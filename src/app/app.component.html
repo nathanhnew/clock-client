@@ -1,3 +1,27 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <div class="col-4 mr-auto" *ngIf="showCog" routerLink="settings">
+        <i class="fa fa-cog fa-2x" aria-hidden="true" on-mouseover="onHover()" on-mouseout="onExitHover()" style="cursor: pointer">{{ cogText }}</i>
+      </div>
+      <div class="col-4 mr-auto" *ngIf="!showCog">
+        <button class="btn btn-secondary" routerLink="/">Home</button>
+      </div>
+      <div class="col-4 ml-auto" *ngIf="!loggedIn && showCog">
+        <button class="btn btn-primary" style="cursor: pointer" [routerLink]="['login']">Log In</button>
+        <button class="btn btn-success" style="cursor: pointer" [routerLink]="['register']">Register</button>
+      </div>
+      <div class="col-2 ml-auto" *ngIf="loggedIn">
+        <span class="navbar-text">{{ authService.username }}</span>
+        <button class="btn btn-danger" style="cursor: pointer" (click)="onLogout()">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="body">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<h4><strong>{{ loc.city.name }}, {{ loc.city.country }}</strong></h4>
+<h1 [style.color]="fontColor">{{ currTime | async | amTz: loc.city.tz | amDateFormat: dateFormat}}</h1>
+<p *ngIf="condReady" class="wx" ><i
+class="fa fa-thermometer-half fa-2x thermo"
+aria-hidden="true"></i> : {{loc.temp}}&deg; {{loc.cond}}
+</p>
